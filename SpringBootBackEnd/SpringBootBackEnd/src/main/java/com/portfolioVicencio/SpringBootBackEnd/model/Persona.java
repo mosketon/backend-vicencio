@@ -1,4 +1,4 @@
-package com.portfolioVicencio.SpringBootBackEnd.personamodel;
+package com.portfolioVicencio.SpringBootBackEnd.model;
 
 import lombok.Getter;
 import lombok.Setter;

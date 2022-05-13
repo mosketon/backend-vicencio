@@ -14,6 +14,7 @@ import lombok.Setter;
 public class Especializaciones {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
+    
     private Long id;
     
     private String especialidad;
@@ -24,8 +25,8 @@ public class Especializaciones {
     }
     
     public Especializaciones (Long id, String especialidad, String descripcion){
-        this.id=id;
-        this.especialidad=especialidad;
-        this.descripcion=descripcion;
+        this.id = id;
+        this.especialidad = especialidad;
+        this.descripcion = descripcion;
     }
 }

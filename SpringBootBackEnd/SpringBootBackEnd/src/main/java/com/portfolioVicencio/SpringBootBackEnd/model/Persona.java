@@ -18,17 +18,19 @@ public class Persona {
     private String nombre;
     private String apellido;
     private String acercaDe;
+    private String fotoperfil;
     
     public Persona(){
         
     }
     
-    public Persona (Long id, String nombre, String apellido, String acercaDe){
+    public Persona (Long id, String nombre, String apellido, String acercaDe, String fotoperfil){
         
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.acercaDe = acercaDe;
+        this.fotoperfil = fotoperfil;
     }
             
     

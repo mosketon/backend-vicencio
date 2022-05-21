@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,5 +36,20 @@ public class EspecializacionesController {
     @DeleteMapping ("/delete/especializaciones/{id}")
     public void borrarEspecializaciones (@PathVariable Long id){
         espServ.borrarEspecializaciones(id);
+    }
+    
+    @PutMapping("/especializaciones/editar/{id}")
+    public Especializaciones editEspecializaciones (@PathVariable Long id,
+                                @RequestParam ("especiallidad") String nuevoEspecialidad,
+                                @RequestParam ("descripcion") String nuevoDescripcion,
+                                @RequestParam ("foto") String nuevoFoto){
+       Especializaciones esp = espServ.buscarEspecializaciones(id);
+       
+       esp.setEspecialidad(nuevoEspecialidad);
+       esp.setDescripcion(nuevoDescripcion);
+       esp.setFoto(nuevoFoto);
+       
+       espServ.crearEspecializaciones(esp);
+       return esp;
     }
 }

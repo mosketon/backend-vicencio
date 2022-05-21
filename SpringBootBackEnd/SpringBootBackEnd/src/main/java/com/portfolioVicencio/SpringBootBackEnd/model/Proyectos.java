@@ -18,14 +18,17 @@ public class Proyectos {
     
     private String nombre;
     private String descripcion;
+    private String foto;
     
     public Proyectos(){
         
     }
     
-    public Proyectos (Long id, String nombre, String descripcion){
+    public Proyectos (Long id, String nombre, String descripcion, String foto){
         this.id=id;
         this.nombre=nombre;
         this.descripcion=descripcion;
+        this.foto=foto;
+        
     }
 }

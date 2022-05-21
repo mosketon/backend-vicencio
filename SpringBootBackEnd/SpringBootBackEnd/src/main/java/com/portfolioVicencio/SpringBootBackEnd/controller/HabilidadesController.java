@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +35,21 @@ public class HabilidadesController {
     @DeleteMapping ("/delete/habilidades/{id}")
     public void borrarHabilidades (@PathVariable Long id){
         habiServ.borrarHabilidades(id);
+    }
+    
+    @PutMapping("/habilidades/editar/{id}")
+    public Habilidades editEducacion (@PathVariable Long id,
+                                @RequestParam ("tipo") String nuevoTipo,
+                                @RequestParam ("porcentaje") String nuevoPorcentaje,
+                                @RequestParam ("foto") String nuevoFoto){
+       Habilidades hab = habiServ.buscarHabilidades(id);
+       
+       hab.setTipo(nuevoTipo);
+       hab.setPorcentaje(nuevoPorcentaje);
+       hab.setFoto(nuevoFoto);
+       
+       habiServ.crearHabilidades(hab);
+       return hab;
     }
     
 }

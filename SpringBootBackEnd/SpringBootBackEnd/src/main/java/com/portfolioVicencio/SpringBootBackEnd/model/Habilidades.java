@@ -19,14 +19,16 @@ public class Habilidades {
     
     private String tipo;
     private String porcentaje;
+    private String foto;
     
     public Habilidades(){
         
     }
     
-    public Habilidades (Long id, String tipo, String porcentaje){
+    public Habilidades (Long id, String tipo, String porcentaje, String foto){
         this.id=id;
         this.tipo=tipo;
         this.porcentaje=porcentaje;
+        this.foto=foto;
     }
 }

@@ -19,14 +19,16 @@ public class Especializaciones {
     
     private String especialidad;
     private String descripcion;
+    private String foto;
     
     public Especializaciones(){
         
     }
     
-    public Especializaciones (Long id, String especialidad, String descripcion){
+    public Especializaciones (Long id, String especialidad, String descripcion, String foto){
         this.id = id;
         this.especialidad = especialidad;
         this.descripcion = descripcion;
+        this.foto = foto;
     }
 }

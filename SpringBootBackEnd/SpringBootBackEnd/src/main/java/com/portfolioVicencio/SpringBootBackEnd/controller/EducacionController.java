@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,5 +34,26 @@ public class EducacionController {
     @DeleteMapping ("/delete/educacion/{id}")
     public void borrarEducacion (@PathVariable Long id){
         eduServ.borrarEducacion(id);
+    }
+    
+    @PutMapping("/educacion/editar/{id}")
+    public Educacion editEducacion (@PathVariable Long id,
+                                @RequestParam ("establecimiento") String nuevoEstablecimiento,
+                                @RequestParam ("desde") String nuevoDesde,
+                                @RequestParam ("hasta") String nuevoHasta,
+                                @RequestParam ("lugar") String nuevoLugar,
+                                @RequestParam ("titulo") String nuevoTitulo,
+                                @RequestParam ("foto") String nuevoFoto){
+       Educacion edu = eduServ.buscarEducacion(id);
+       
+       edu.setEstablecimiento (nuevoEstablecimiento);
+       edu.setDesde(nuevoDesde);
+       edu.setHasta(nuevoHasta);
+       edu.setLugar(nuevoLugar);
+       edu.setTitulo(nuevoTitulo);
+       edu.setFoto(nuevoFoto);
+              
+       eduServ.crearEducacion(edu);
+       return edu;
     }
 }

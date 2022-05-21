@@ -20,17 +20,19 @@ public class Experiencia {
     private String lugar;
     private String desde;
     private String hasta;
+    private String foto;
     
     public Experiencia(){
         
     }
     
-    public Experiencia (Long id, String nombre, String lugar, String desde, String hasta){
+    public Experiencia (Long id, String nombre, String lugar, String desde, String hasta, String foto){
         
         this.id = id;
         this.nombre = nombre;
         this.lugar = lugar;
         this.desde = desde;
         this.hasta = hasta;
+        this.foto = foto;
     }
 }

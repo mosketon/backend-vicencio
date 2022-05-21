@@ -23,16 +23,18 @@ public class Educacion {
     private String hasta;
     private String lugar;
     private String titulo;
+    private String foto;
 
     public Educacion() {
 
     }
 
-    public Educacion(Long id, String establecimiento, String desde, String hasta, String lugar, String titulo) {
+    public Educacion(Long id, String establecimiento, String desde, String hasta, String lugar, String titulo, String foto) {
         this.id = id;
         this.establecimiento = establecimiento;
         this.desde = desde;
         this.hasta = hasta;
         this.titulo = titulo;
+        this.foto = foto;
     }
 }

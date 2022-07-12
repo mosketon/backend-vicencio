@@ -42,12 +42,10 @@ public class UsuarioPrincipal implements UserDetails {
         return password;
     }
 
-  
     public String getNombre() {
         return nombre;
     }
 
-    
     public String getEmail() {
         return email;
     }

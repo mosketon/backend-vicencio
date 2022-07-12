@@ -78,8 +78,29 @@
             <version>5.6.3</version>
             <type>jar</type>
         </dependency>
+        <dependency> 
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>6.0.13.Final</version>
+    </dependency> 
+    <dependency> 
+        <groupId>org.glassfish</groupId>
+        <artifactId>javax.el</artifactId>
+        <version>3.0.0</version>
+     </dependency>
+     
     </dependencies>
-
+    <repositories> 
+        <repository> 
+            <id>Central Maven repository</id> 
+            <name>Central Maven repository https</name> 
+            <url>https://repo.maven.apache.org/maven2</url> 
+            <layout>default</layout> 
+            <snapshots> 
+                <enabled>false</enabled> 
+            </snapshots> 
+        </repository> 
+    </repositories>
     <build>
         <plugins>
             <plugin>

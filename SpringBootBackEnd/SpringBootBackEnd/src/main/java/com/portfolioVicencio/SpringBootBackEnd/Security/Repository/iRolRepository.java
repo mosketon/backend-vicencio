@@ -1,4 +1,4 @@
-package com.portfolioVicencio.SpringBootBackEnd.Security.Repositoy;
+package com.portfolioVicencio.SpringBootBackEnd.Security.Repository;
 
 import com.portfolioVicencio.SpringBootBackEnd.Security.Entity.Rol;
 import com.portfolioVicencio.SpringBootBackEnd.Security.Enums.RolNombre;
@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface iRolRepository extends JpaRepository<Rol, Integer>{
-    Optional <Rol> findByRolNombre(RolNombre rolNombre);
+    Optional<Rol> findByRolNombre(RolNombre rolNombre);
     
 }

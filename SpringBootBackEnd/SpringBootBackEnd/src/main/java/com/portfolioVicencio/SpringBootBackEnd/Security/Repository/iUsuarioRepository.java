@@ -1,4 +1,4 @@
-package com.portfolioVicencio.SpringBootBackEnd.Security.Repositoy;
+package com.portfolioVicencio.SpringBootBackEnd.Security.Repository;
 
 import com.portfolioVicencio.SpringBootBackEnd.Security.Entity.Usuario;
 import java.util.Optional;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface iUsuarioRepository extends JpaRepository<Usuario, Integer>{
     Optional<Usuario> findByNombreUsuario (String nombreUsuario);
-    
-    boolean existByNombreUsuario(String nombreUsuario);
-    boolean existByEmail (String email);
+    boolean existsByNombreUsuario (String nombreUsuario);
+    boolean existsByEmail (String email);
 }

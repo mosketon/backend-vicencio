@@ -3,7 +3,7 @@ package com.portfolioVicencio.SpringBootBackEnd.Security.Service;
 
 import com.portfolioVicencio.SpringBootBackEnd.Security.Entity.Rol;
 import com.portfolioVicencio.SpringBootBackEnd.Security.Enums.RolNombre;
-import com.portfolioVicencio.SpringBootBackEnd.Security.Repositoy.iRolRepository;
+import com.portfolioVicencio.SpringBootBackEnd.Security.Repository.iRolRepository;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

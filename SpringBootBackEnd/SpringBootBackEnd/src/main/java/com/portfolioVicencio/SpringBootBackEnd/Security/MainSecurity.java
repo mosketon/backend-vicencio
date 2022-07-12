@@ -20,10 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 public class MainSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired

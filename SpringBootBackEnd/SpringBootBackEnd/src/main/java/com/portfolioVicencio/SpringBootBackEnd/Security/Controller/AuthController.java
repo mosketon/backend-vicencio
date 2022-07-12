@@ -11,6 +11,7 @@ import com.portfolioVicencio.SpringBootBackEnd.Security.Service.UsuarioService;
 import com.portfolioVicencio.SpringBootBackEnd.Security.jwt.JwtProvider;
 import java.util.HashSet;
 import java.util.Set;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,16 +47,16 @@ public class AuthController {
 
     @PostMapping("/nuevo")
 
-    public ResponseEntity<?> nuevo(@Validated @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) {
+    public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity(new Mensaje("Campos mal colocados o email invalido"), HttpStatus.BAD_REQUEST);
         }
 
-        if (usuarioService.existByNombreUsuario(nuevoUsuario.getNombreUsuario())) {
+        if (usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario())) {
             return new ResponseEntity(new Mensaje("Este nombre de usuario ya existe"), HttpStatus.BAD_REQUEST);
         }
 
-        if (usuarioService.existByEmail(nuevoUsuario.getEmail())) {
+        if (usuarioService.existsByEmail(nuevoUsuario.getEmail())) {
             return new ResponseEntity(new Mensaje("Este email ya existe"), HttpStatus.BAD_REQUEST);
         }
 
@@ -77,7 +77,7 @@ public class AuthController {
 
     @PostMapping("/login")
 
-    public ResponseEntity <JwtDto> login(@Validated @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
+    public ResponseEntity <JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) 
             return new ResponseEntity(new Mensaje("Campos mal colocados"), HttpStatus.BAD_REQUEST);
         

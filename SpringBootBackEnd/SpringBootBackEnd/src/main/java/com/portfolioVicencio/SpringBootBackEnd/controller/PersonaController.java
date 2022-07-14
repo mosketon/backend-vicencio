@@ -25,19 +25,19 @@ public class PersonaController {
     private IPersonaService persoServ;
 
     @PreAuthorize("hashRole('ADMIN')")
-    @PostMapping("/new/personas")
+    @PostMapping("/personas/new")
     public void agregarPersona(@RequestBody Persona per) {
         persoServ.crearPersona(per);
     }
 
-    @GetMapping("/ver/personas")
+    @GetMapping("/personas/ver")
     @ResponseBody
     public List<Persona> verPersona() {
         return persoServ.verPersona();
     }
 
     @PreAuthorize("hashRole('ADMIN')")
-    @DeleteMapping("/delete/personas/{id}")
+    @DeleteMapping("/personas/delete/{id}")
     public void borrarPersona(@PathVariable Long id) {
         persoServ.borrarPersona(id);
     }
@@ -58,6 +58,11 @@ public class PersonaController {
 
         persoServ.crearPersona(per);
         return per;
+    }
+    
+    @GetMapping("personas/ver/perfil")
+    public Persona buscarPersona(){
+        return persoServ.buscarPersona((long)1);
     }
 
 }

@@ -5,6 +5,7 @@ import com.portfolioVicencio.SpringBootBackEnd.service.IHabilidadesService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,25 +17,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin (origins = "http://localHost:4200")
 public class HabilidadesController {
 
     @Autowired
     private IHabilidadesService habiServ;
 
     @PreAuthorize("hashRole('ADMIN')")
-    @PostMapping("/new/habilidades")
+    @PostMapping("/habilidades/new")
     public void agregarhabilidades(@RequestBody Habilidades hab) {
         habiServ.crearHabilidades(hab);
     }
 
-    @GetMapping("/ver/habilidades")
+    @GetMapping("/habilidades/ver")
     @ResponseBody
     public List<Habilidades> verHabilidades() {
         return habiServ.verHabilidades();
     }
 
     @PreAuthorize("hashRole('ADMIN')")
-    @DeleteMapping("/delete/habilidades/{id}")
+    @DeleteMapping("/habilidades/delete/{id}")
     public void borrarHabilidades(@PathVariable Long id) {
         habiServ.borrarHabilidades(id);
     }

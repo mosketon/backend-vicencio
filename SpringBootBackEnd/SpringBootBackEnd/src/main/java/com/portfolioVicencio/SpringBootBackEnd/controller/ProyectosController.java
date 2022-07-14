@@ -5,6 +5,7 @@ import com.portfolioVicencio.SpringBootBackEnd.service.IProyectosService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,25 +17,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin (origins = "http://localHost:4200")
 public class ProyectosController {
 
     @Autowired
     private IProyectosService proyeServ;
 
     @PreAuthorize("hashRole('ADMIN')")
-    @PostMapping("/new/proyectos")
+    @PostMapping("/proyectos/new")
     public void agregarProyectos(@RequestBody Proyectos pro) {
         proyeServ.crearProyectos(pro);
     }
 
-    @GetMapping("/ver/proyectos")
+    @GetMapping("/proyectos/ver")
     @ResponseBody
     public List<Proyectos> verProyectos() {
         return proyeServ.verProyectos();
     }
 
     @PreAuthorize("hashRole('ADMIN')")
-    @DeleteMapping("/delete/proyectos/{id}")
+    @DeleteMapping("/proyectos/delete/{id}")
     public void borrarProyectos(@PathVariable Long id) {
         proyeServ.borrarProyectos(id);
     }

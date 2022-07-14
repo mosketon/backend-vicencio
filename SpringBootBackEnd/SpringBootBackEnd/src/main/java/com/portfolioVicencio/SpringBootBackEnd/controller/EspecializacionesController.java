@@ -5,6 +5,7 @@ import com.portfolioVicencio.SpringBootBackEnd.service.IEspecializacionesService
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,25 +17,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class EspecializacionesController {
 
     @Autowired
     private IEspecializacionesService espServ;
 
     @PreAuthorize("hashRole('ADMIN')")
-    @PostMapping("/new/especializaciones")
+    @PostMapping("/especializaciones/new")
     public void agregarEspecializaciones(@RequestBody Especializaciones esp) {
         espServ.crearEspecializaciones(esp);
     }
 
-    @GetMapping("/ver/especializaciones")
+    @GetMapping("/especializaciones/ver")
     @ResponseBody
     public List<Especializaciones> verEspecializaciones() {
         return espServ.verEspecializaciones();
     }
 
     @PreAuthorize("hashRole('ADMIN')")
-    @DeleteMapping("/delete/especializaciones/{id}")
+    @DeleteMapping("/especializaciones/delete/{id}")
     public void borrarEspecializaciones(@PathVariable Long id) {
         espServ.borrarEspecializaciones(id);
     }

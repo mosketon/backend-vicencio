@@ -5,6 +5,7 @@ import com.portfolioVicencio.SpringBootBackEnd.service.IEducacionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,25 +17,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class EducacionController {
 
     @Autowired
     private IEducacionService eduServ;
 
     @PreAuthorize("hashRole('ADMIN')")
-    @PostMapping("/new/educacion")
+    @PostMapping("/educacion/new")
     public void agregarEducacion(@RequestBody Educacion edu) {
         eduServ.crearEducacion(edu);
     }
 
-    @GetMapping("/ver/educacion")
+    @GetMapping("/educacion/ver")
     @ResponseBody
     public List<Educacion> verEducacion() {
         return eduServ.verEducación();
     }
 
     @PreAuthorize("hashRole('ADMIN')")
-    @DeleteMapping("/delete/educacion/{id}")
+    @DeleteMapping("/educacion/delete/{id}")
     public void borrarEducacion(@PathVariable Long id) {
         eduServ.borrarEducacion(id);
     }

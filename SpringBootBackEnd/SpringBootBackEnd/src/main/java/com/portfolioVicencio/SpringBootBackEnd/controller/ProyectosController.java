@@ -1,7 +1,7 @@
 package com.portfolioVicencio.SpringBootBackEnd.controller;
 
 import com.portfolioVicencio.SpringBootBackEnd.model.Proyectos;
-import com.portfolioVicencio.SpringBootBackEnd.service.IProyectosService;
+import com.portfolioVicencio.SpringBootBackEnd.Interface.IProyectosService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

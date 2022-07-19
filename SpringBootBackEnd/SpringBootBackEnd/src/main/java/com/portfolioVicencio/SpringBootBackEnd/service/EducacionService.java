@@ -1,6 +1,7 @@
 
 package com.portfolioVicencio.SpringBootBackEnd.service;
 
+import com.portfolioVicencio.SpringBootBackEnd.Interface.IEducacionService;
 import com.portfolioVicencio.SpringBootBackEnd.model.Educacion;
 import com.portfolioVicencio.SpringBootBackEnd.repository.EducacionRepository;
 import java.util.List;

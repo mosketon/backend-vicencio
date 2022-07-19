@@ -2,7 +2,6 @@ package com.portfolioVicencio.SpringBootBackEnd.Security.jwt;
 
 import com.portfolioVicencio.SpringBootBackEnd.Security.Entity.UsuarioPrincipal;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;

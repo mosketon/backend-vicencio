@@ -1,5 +1,6 @@
 package com.portfolioVicencio.SpringBootBackEnd.service;
 
+import com.portfolioVicencio.SpringBootBackEnd.Interface.IEspecializacionesService;
 import com.portfolioVicencio.SpringBootBackEnd.model.Especializaciones;
 import com.portfolioVicencio.SpringBootBackEnd.repository.EspecializacionesRepository;
 import java.util.List;

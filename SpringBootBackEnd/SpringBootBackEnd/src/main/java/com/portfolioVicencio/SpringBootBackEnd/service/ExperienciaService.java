@@ -3,33 +3,44 @@ package com.portfolioVicencio.SpringBootBackEnd.service;
 import com.portfolioVicencio.SpringBootBackEnd.model.Experiencia;
 import com.portfolioVicencio.SpringBootBackEnd.repository.ExperienciaRepository;
 import java.util.List;
+import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ExperienciaService implements IExperienciaService{
-    
+@Transactional
+public class ExperienciaService {
+
     @Autowired
-    public ExperienciaRepository expeRepo;
+    ExperienciaRepository experienciaRepository;
 
-    @Override
-    public List<Experiencia> verExperiencia() {
-    return expeRepo.findAll();
+    public List<Experiencia> list() {
+        return experienciaRepository.findAll();
     }
 
-    @Override
-    public void crearExperiencia(Experiencia expe) {
-     expeRepo.save(expe);
+    public Optional<Experiencia> getOne(int id) {
+        return experienciaRepository.findById(id);
     }
 
-    @Override
-    public void borrarExperiencia(Long id) {
-        expeRepo.deleteById(id);
+    public Optional<Experiencia> getByNombreE(String nombreEx) {
+        return experienciaRepository.findByNombreEx(nombreEx);
     }
 
-    @Override
-    public Experiencia buscarExperiencia(Long id) {
-     return expeRepo.findById(id).orElse(null);
+    public void save(Experiencia experiencia) {
+        experienciaRepository.save(experiencia);
     }
-    
+
+    public void delete(int id) {
+        experienciaRepository.deleteById(id);
+    }
+
+    public boolean existsById(int id) {
+        return experienciaRepository.existsById(id);
+    }
+
+    public boolean existsByNombre(String nombreEx) {
+        return experienciaRepository.existsByNombreEx(nombreEx);
+    }
+
 }

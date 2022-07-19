@@ -1,9 +1,14 @@
 package com.portfolioVicencio.SpringBootBackEnd.controller;
 
+import com.portfolioVicencio.SpringBootBackEnd.Dto.dtoExperiencia;
 import com.portfolioVicencio.SpringBootBackEnd.model.Experiencia;
-import com.portfolioVicencio.SpringBootBackEnd.service.IExperienciaService;
+import com.portfolioVicencio.SpringBootBackEnd.Security.Controller.Mensaje;
+import com.portfolioVicencio.SpringBootBackEnd.service.ExperienciaService;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,52 +17,77 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("experiencia")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ExperienciaController {
 
     @Autowired
-    private IExperienciaService expeServ;
+    ExperienciaService experienciaService;
 
-    @PreAuthorize("hashRole('ADMIN')")
-    @PostMapping("/experiencia/new")
-    public void agregarExperiencia(@RequestBody Experiencia expe) {
-        expeServ.crearExperiencia(expe);
+    @GetMapping("/lista")
+    public ResponseEntity<List<Experiencia>> list() {
+        List<Experiencia> list = experienciaService.list();
+        return new ResponseEntity(list, HttpStatus.OK);
     }
 
-    @GetMapping("/experiencia/ver")
-    @ResponseBody
-    public List<Experiencia> verExperiencia() {
-        return expeServ.verExperiencia();
+    @PostMapping("/create")
+    public ResponseEntity<?> create(@RequestBody dtoExperiencia dtoExp) {
+        if (StringUtils.isBlank(dtoExp.getNombreEx())) {
+            return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
+        }
+        if (experienciaService.existsByNombre(dtoExp.getNombreEx())) {
+            return new ResponseEntity(new Mensaje("Esa experiencia existe"), HttpStatus.BAD_REQUEST);
+        }
+        Experiencia experiencia = new Experiencia(dtoExp.getNombreEx(), dtoExp.getDescripcionEx(), dtoExp.getFotoEx());
+        experienciaService.save(experiencia);
+
+        return new ResponseEntity(new Mensaje("Experiencia agregada"), HttpStatus.OK);
     }
 
-    @PreAuthorize("hashRole('ADMIN')")
-    @DeleteMapping("/experiencia/delete/{id}")
-    public void borrarExperiencia(@PathVariable Long id) {
-        expeServ.borrarExperiencia(id);
+   
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoExperiencia dtoExp) {
+        if (!experienciaService.existsById(id)) {
+            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
+        }
+        if (experienciaService.existsByNombre(dtoExp.getNombreEx()) && experienciaService.getByNombreE(dtoExp.getNombreEx()).get().getId() != id) {
+            return new ResponseEntity(new Mensaje("Experiencia ya existe"), HttpStatus.BAD_REQUEST);
+        }
+        if (StringUtils.isBlank(dtoExp.getNombreEx())) {
+            return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
+        }
+
+        Experiencia experiencia = experienciaService.getOne(id).get();
+        experiencia.setNombreEx(dtoExp.getNombreEx());
+        experiencia.setDescripcionEx(dtoExp.getDescripcionEx());
+        experiencia.setFotoEx(dtoExp.getFotoEx());
+
+        experienciaService.save(experiencia);
+        return new ResponseEntity(new Mensaje("Experiencia actualizada"), HttpStatus.OK);
     }
 
-    @PreAuthorize("hashRole('ADMIN')")
-    @PutMapping("/experiencia/editar/{id}")
-    public Experiencia editExperiencia(@PathVariable Long id,
-            @RequestParam("nombre") String nuevoNombre,
-            @RequestParam("desde") String nuevoDesde,
-            @RequestParam("hasta") String nuevoHasta,
-            @RequestParam("lugar") String nuevoLugar,
-            @RequestParam("foto") String nuevoFoto) {
-        Experiencia expe = expeServ.buscarExperiencia(id);
+    
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+        if (!experienciaService.existsById(id)) {
+            return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.NOT_FOUND);
+        }
 
-        expe.setNombre(nuevoNombre);
-        expe.setDesde(nuevoDesde);
-        expe.setHasta(nuevoHasta);
-        expe.setLugar(nuevoLugar);
-        expe.setFoto(nuevoFoto);
-
-        expeServ.crearExperiencia(expe);
-        return expe;
+        experienciaService.delete(id);
+        return new ResponseEntity(new Mensaje("Experiencia eliminada"), HttpStatus.OK);
     }
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Experiencia> getById(@PathVariable("id") int id) {
+        if (!experienciaService.existsById(id)) {
+            return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
+        }
+        Experiencia experiencia = experienciaService.getOne(id).get();
+        return new ResponseEntity<>(experiencia, HttpStatus.OK);
+    }
+
 }

@@ -1,7 +1,7 @@
 package com.portfolioVicencio.SpringBootBackEnd.controller;
 
 import com.portfolioVicencio.SpringBootBackEnd.model.Persona;
-import com.portfolioVicencio.SpringBootBackEnd.service.IPersonaService;
+import com.portfolioVicencio.SpringBootBackEnd.Interface.IPersonaService;
 import com.portfolioVicencio.SpringBootBackEnd.service.PersonaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,24 +22,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonaController {
 
     @Autowired
-    private IPersonaService persoServ;
+    private IPersonaService ipersonaService;
 
     @PreAuthorize("hashRole('ADMIN')")
-    @PostMapping("/personas/new")
-    public void agregarPersona(@RequestBody Persona per) {
-        persoServ.crearPersona(per);
+    @PostMapping("/personas/crear")
+    public String createPersona(@RequestBody Persona persona) {
+        ipersonaService.savePersona(persona);
+        return "La persona fue guardada correctamente";
     }
 
-    @GetMapping("/personas/ver")
+    @GetMapping("/personas/traer")
     @ResponseBody
-    public List<Persona> verPersona() {
-        return persoServ.verPersona();
+    public List<Persona> getPersona() {
+        return ipersonaService.getPersona();
     }
 
     @PreAuthorize("hashRole('ADMIN')")
     @DeleteMapping("/personas/delete/{id}")
-    public void borrarPersona(@PathVariable Long id) {
-        persoServ.borrarPersona(id);
+    public String deletePersona(@PathVariable Long id) {
+        ipersonaService.deletePersona(id);
+        return "La persona fue eliminada correctamente";
     }
 
     @PreAuthorize("hashRole('ADMIN')")
@@ -49,20 +51,20 @@ public class PersonaController {
             @RequestParam("apellido") String nuevoApellido,
             @RequestParam("acercaDe") String nuevoAcercaDe,
             @RequestParam("fotoperfil") String nuevoFotoperfil) {
-        Persona per = persoServ.buscarPersona(id);
+        Persona persona = ipersonaService.findPersona(id);
 
-        per.setNombre(nuevoNombre);
-        per.setApellido(nuevoApellido);
-        per.setAcercaDe(nuevoAcercaDe);
-        per.setFotoperfil(nuevoFotoperfil);
+        persona.setNombre(nuevoNombre);
+        persona.setApellido(nuevoApellido);
+        persona.setAcercaDe(nuevoAcercaDe);
+        persona.setFotoperfil(nuevoFotoperfil);
 
-        persoServ.crearPersona(per);
-        return per;
+        ipersonaService.savePersona(persona);
+        return persona;
     }
     
     @GetMapping("personas/ver/perfil")
-    public Persona buscarPersona(){
-        return persoServ.buscarPersona((long)1);
+    public Persona findPersona(){
+        return ipersonaService.findPersona((long)1);
     }
 
 }

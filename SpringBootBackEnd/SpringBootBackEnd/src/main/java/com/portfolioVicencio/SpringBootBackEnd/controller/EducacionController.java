@@ -1,7 +1,7 @@
 package com.portfolioVicencio.SpringBootBackEnd.controller;
 
 import com.portfolioVicencio.SpringBootBackEnd.model.Educacion;
-import com.portfolioVicencio.SpringBootBackEnd.service.IEducacionService;
+import com.portfolioVicencio.SpringBootBackEnd.Interface.IEducacionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

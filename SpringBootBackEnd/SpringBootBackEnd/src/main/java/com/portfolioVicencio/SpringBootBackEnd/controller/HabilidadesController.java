@@ -1,7 +1,7 @@
 package com.portfolioVicencio.SpringBootBackEnd.controller;
 
 import com.portfolioVicencio.SpringBootBackEnd.model.Habilidades;
-import com.portfolioVicencio.SpringBootBackEnd.service.IHabilidadesService;
+import com.portfolioVicencio.SpringBootBackEnd.Interface.IHabilidadesService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -1,5 +1,6 @@
 package com.portfolioVicencio.SpringBootBackEnd.service;
 
+import com.portfolioVicencio.SpringBootBackEnd.Interface.IHabilidadesService;
 import com.portfolioVicencio.SpringBootBackEnd.model.Habilidades;
 import com.portfolioVicencio.SpringBootBackEnd.repository.HabilidadesRepository;
 import java.util.List;

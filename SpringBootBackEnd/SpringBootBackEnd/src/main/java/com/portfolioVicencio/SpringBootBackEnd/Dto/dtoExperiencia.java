@@ -1,45 +1,27 @@
+package com.portfolioVicencio.SpringBootBackEnd.Dto;
 
-package com.portfolioVicencio.SpringBootBackEnd.model;
+import javax.validation.constraints.NotBlank;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-
-@Entity
-public class Experiencia {
-    
-    @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
-    
-    private int id;
+ 
+public class dtoExperiencia {
+    @NotBlank
     private String nombreEx;
+    @NotBlank
     private String descripcionEx;
     private String fotoEx;
-     
     
-    public Experiencia(){
-        
+    //Const
+
+    public dtoExperiencia() {
     }
-    
-    public Experiencia (String nombreEx, String descripcionEx, String fotoEx){
-        
-        
+
+    public dtoExperiencia(String nombreEx, String descripcionEx, String fotoEx) {
         this.nombreEx = nombreEx;
         this.descripcionEx = descripcionEx;
         this.fotoEx = fotoEx;
     }
     
-    //Getter y Setter
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    // G&S
 
     public String getNombreEx() {
         return nombreEx;
@@ -64,9 +46,6 @@ public class Experiencia {
     public void setFotoEx(String fotoEx) {
         this.fotoEx = fotoEx;
     }
-
-    
-    
     
     
     

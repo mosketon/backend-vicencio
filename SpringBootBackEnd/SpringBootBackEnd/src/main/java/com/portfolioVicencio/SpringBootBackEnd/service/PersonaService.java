@@ -1,5 +1,6 @@
 package com.portfolioVicencio.SpringBootBackEnd.service;
 
+import com.portfolioVicencio.SpringBootBackEnd.Interface.IPersonaService;
 import com.portfolioVicencio.SpringBootBackEnd.model.Persona;
 import com.portfolioVicencio.SpringBootBackEnd.repository.PersonaRepository;
 import java.util.List;
@@ -10,26 +11,29 @@ import org.springframework.stereotype.Service;
 public class PersonaService implements IPersonaService {
 
     @Autowired
-    public PersonaRepository persoRepo;
+    PersonaRepository personaRepository;
 
     @Override
-    public List<Persona> verPersona() {
-        return persoRepo.findAll();
+    public List<Persona> getPersona() {
+        List<Persona> persona = personaRepository.findAll();
+        return persona;
     }
 
     @Override
-    public void crearPersona(Persona per) {
-        persoRepo.save(per);
+    public void savePersona(Persona persona) {
+        personaRepository.save(persona);
     }
 
     @Override
-    public void borrarPersona(Long id) {
-        persoRepo.deleteById(id);
+    public void deletePersona(Long id) {
+        personaRepository.deleteById(id);
     }
 
     @Override
-    public Persona buscarPersona(Long id) {
-        return persoRepo.findById(id).orElse(null);
+    public Persona findPersona(Long id) {
+        Persona persona = personaRepository.findById(id).orElse(null);
+        return persona;
+
     }
 
 }

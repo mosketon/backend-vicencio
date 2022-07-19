@@ -1,7 +1,7 @@
 package com.portfolioVicencio.SpringBootBackEnd.controller;
 
 import com.portfolioVicencio.SpringBootBackEnd.model.Especializaciones;
-import com.portfolioVicencio.SpringBootBackEnd.service.IEspecializacionesService;
+import com.portfolioVicencio.SpringBootBackEnd.Interface.IEspecializacionesService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -1,5 +1,6 @@
 package com.portfolioVicencio.SpringBootBackEnd.service;
 
+import com.portfolioVicencio.SpringBootBackEnd.Interface.IProyectosService;
 import com.portfolioVicencio.SpringBootBackEnd.model.Proyectos;
 import com.portfolioVicencio.SpringBootBackEnd.repository.ProyectosRepository;
 import java.util.List;

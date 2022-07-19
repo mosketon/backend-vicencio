@@ -1,38 +1,22 @@
-package com.portfolioVicencio.SpringBootBackEnd.model;
+package com.portfolioVicencio.SpringBootBackEnd.Dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
+public class dtoEspecializaciones {
 
-@Entity
-
-public class Especializaciones {
-    @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
-    
-    private int id;
+    @NotBlank
     private String nombreEspe;
+    @NotBlank
     private String descripcionEspe;
     private String fotoEspe;
 
-    public Especializaciones() {
+    public dtoEspecializaciones() {
     }
 
-    public Especializaciones(String nombreEspe, String descripcionEspe, String fotoEspe) {
-        
+    public dtoEspecializaciones(String nombreEspe, String descripcionEspe, String fotoEspe) {
         this.nombreEspe = nombreEspe;
         this.descripcionEspe = descripcionEspe;
         this.fotoEspe = fotoEspe;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombreEspe() {
@@ -58,7 +42,8 @@ public class Especializaciones {
     public void setFotoEspe(String fotoEspe) {
         this.fotoEspe = fotoEspe;
     }
-    
-    
+
     
 }
+
+ 

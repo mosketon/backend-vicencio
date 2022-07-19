@@ -1,37 +1,48 @@
 package com.portfolioVicencio.SpringBootBackEnd.service;
 
-import com.portfolioVicencio.SpringBootBackEnd.Interface.IEspecializacionesService;
+
 import com.portfolioVicencio.SpringBootBackEnd.model.Especializaciones;
 import com.portfolioVicencio.SpringBootBackEnd.repository.EspecializacionesRepository;
 import java.util.List;
+import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class EspecializacionesService implements IEspecializacionesService {
+@Transactional
+
+public class EspecializacionesService {
     
     @Autowired
-    public EspecializacionesRepository espRepo;
-
-    @Override
-    public List<Especializaciones> verEspecializaciones() {
-     return espRepo.findAll();
-    }
-
-    @Override
-    public void crearEspecializaciones(Especializaciones esp) {
-     espRepo.save(esp);
-    }
-
-    @Override
-    public void borrarEspecializaciones(Long id) {
-     espRepo.deleteById(id);
-    }
-
-    @Override
-    public Especializaciones buscarEspecializaciones(Long id) {
-     return espRepo.findById(id).orElse(null);
-    }
+    EspecializacionesRepository especializacionesRepository;
     
+    public List<Especializaciones> list() {
+        return especializacionesRepository.findAll();
+    }
+
+    public Optional<Especializaciones> getOne(int id) {
+        return especializacionesRepository.findById(id);
+    }
+
+    public Optional<Especializaciones> getByNombreEspe(String nombreEspe) {
+        return especializacionesRepository.findByNombreEspe(nombreEspe);
+    }
+
+    public void save(Especializaciones especializaciones) {
+        especializacionesRepository.save(especializaciones);
+    }
+
+    public void delete(int id) {
+        especializacionesRepository.deleteById(id);
+    }
+
+    public boolean existsById(int id) {
+        return especializacionesRepository.existsById(id);
+    }
+
+    public boolean existsByNombre(String nombreEspe) {
+        return especializacionesRepository.existsByNombreEspe(nombreEspe);
+    }
 }

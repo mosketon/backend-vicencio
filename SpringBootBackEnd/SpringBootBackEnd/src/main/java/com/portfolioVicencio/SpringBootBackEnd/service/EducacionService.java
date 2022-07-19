@@ -1,37 +1,49 @@
 
 package com.portfolioVicencio.SpringBootBackEnd.service;
 
-import com.portfolioVicencio.SpringBootBackEnd.Interface.IEducacionService;
+
 import com.portfolioVicencio.SpringBootBackEnd.model.Educacion;
 import com.portfolioVicencio.SpringBootBackEnd.repository.EducacionRepository;
 import java.util.List;
+import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EducacionService implements IEducacionService {
+@Transactional
 
+public class EducacionService  {
     @Autowired
-    public EducacionRepository eduRepo;
+    EducacionRepository educacionRepository;
     
-    @Override
-    public List<Educacion> verEducación() {
-        return eduRepo.findAll();
+    public List<Educacion> list() {
+        return educacionRepository.findAll();
     }
 
-    @Override
-    public void crearEducacion(Educacion edu) {
-    eduRepo.save(edu);
+    public Optional<Educacion> getOne(int id) {
+        return educacionRepository.findById(id);
     }
 
-    @Override
-    public void borrarEducacion(Long id) {
-    eduRepo.deleteById(id);
+    public Optional<Educacion> getByNombreEdu(String nombreEdu) {
+        return educacionRepository.findByNombreEdu(nombreEdu);
     }
 
-    @Override
-    public Educacion buscarEducacion(Long id) {
-       return eduRepo.findById(id).orElse(null);
+    public void save(Educacion educacion) {
+        educacionRepository.save(educacion);
     }
-    
+
+    public void delete(int id) {
+        educacionRepository.deleteById(id);
+    }
+
+    public boolean existsById(int id) {
+        return educacionRepository.existsById(id);
+    }
+
+    public boolean existsByNombre(String nombreEdu) {
+        return educacionRepository.existsByNombreEdu(nombreEdu);
+    }
 }
+
+    

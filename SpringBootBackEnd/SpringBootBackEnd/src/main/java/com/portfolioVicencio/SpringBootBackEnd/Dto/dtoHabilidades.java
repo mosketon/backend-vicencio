@@ -1,38 +1,23 @@
-package com.portfolioVicencio.SpringBootBackEnd.model;
+package com.portfolioVicencio.SpringBootBackEnd.Dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 
-@Entity
-
-public class Habilidades {
+public class dtoHabilidades {
     
-    @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
-    private int id;
-    
+    @NotBlank
     private String nombreHabi;
+    @NotBlank
     private String porcentajeHabi;
     private String fotoHabi;
 
-    public Habilidades() {
+    public dtoHabilidades() {
     }
 
-    public Habilidades(String nombreHabi, String porcentajeHabi, String fotoHabi) {
+    public dtoHabilidades(String nombreHabi, String porcentajeHabi, String fotoHabi) {
         this.nombreHabi = nombreHabi;
         this.porcentajeHabi = porcentajeHabi;
         this.fotoHabi = fotoHabi;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombreHabi() {
@@ -59,6 +44,6 @@ public class Habilidades {
         this.fotoHabi = fotoHabi;
     }
 
-    
+   
     
 }

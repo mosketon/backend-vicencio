@@ -1,39 +1,22 @@
-package com.portfolioVicencio.SpringBootBackEnd.model;
+package com.portfolioVicencio.SpringBootBackEnd.Dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
+public class dtoProyectos {
 
-@Entity
-
-public class Proyectos {
-    
-    @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
-    private int id;
-    
+    @NotBlank
     private String nombrePro;
+    @NotBlank
     private String descripcionPro;
     private String fotoPro;
-    
-    public Proyectos(){
-        
+
+    public dtoProyectos() {
     }
 
-    public Proyectos(String nombrePro, String descripcionPro, String fotoPro) {
+    public dtoProyectos(String nombrePro, String descripcionPro, String fotoPro) {
         this.nombrePro = nombrePro;
         this.descripcionPro = descripcionPro;
         this.fotoPro = fotoPro;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombrePro() {

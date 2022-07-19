@@ -1,36 +1,46 @@
 package com.portfolioVicencio.SpringBootBackEnd.service;
 
-import com.portfolioVicencio.SpringBootBackEnd.Interface.IProyectosService;
 import com.portfolioVicencio.SpringBootBackEnd.model.Proyectos;
 import com.portfolioVicencio.SpringBootBackEnd.repository.ProyectosRepository;
 import java.util.List;
+import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProyectosService implements IProyectosService{
+@Transactional
+public class ProyectosService {
     
-    @Autowired
-    public ProyectosRepository proRepo;
-
-    @Override
-    public List<Proyectos> verProyectos() {
-     return proRepo.findAll();
+   @Autowired
+    ProyectosRepository proyectosRepository;
+    
+    public List<Proyectos> list() {
+        return proyectosRepository.findAll();
     }
 
-    @Override
-    public void crearProyectos(Proyectos pro) {
-     proRepo.save(pro);
+    public Optional<Proyectos> getOne(int id) {
+        return proyectosRepository.findById(id);
     }
 
-    @Override
-    public void borrarProyectos(Long id) {
-     proRepo.deleteById(id);
+    public Optional<Proyectos> getByNombrePro(String nombrePro) {
+        return proyectosRepository.findByNombrePro(nombrePro);
     }
 
-    @Override
-    public Proyectos buscarProyectos(Long id) {
-     return proRepo.findById(id).orElse(null);
+    public void save(Proyectos proyectos) {
+        proyectosRepository.save(proyectos);
+    }
+
+    public void delete(int id) {
+        proyectosRepository.deleteById(id);
+    }
+
+    public boolean existsById(int id) {
+        return proyectosRepository.existsById(id);
+    }
+
+    public boolean existsByNombre(String nombrePro) {
+        return proyectosRepository.existsByNombrePro(nombrePro);
     }
     
 }

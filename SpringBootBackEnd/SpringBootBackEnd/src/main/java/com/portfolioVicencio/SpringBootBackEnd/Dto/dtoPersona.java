@@ -1,19 +1,10 @@
-package com.portfolioVicencio.SpringBootBackEnd.model;
+package com.portfolioVicencio.SpringBootBackEnd.Dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
-@Entity
-
-public class Persona {
-    @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
-    private int id;
+public class dtoPersona {
     @NotNull
     @Size(min = 1, max =50, message = "no cumple con la longitud")
     private String nombre;
@@ -23,25 +14,15 @@ public class Persona {
     @NotNull
     private String acercaDe;
     private String fotoperfil;
-    
-    public Persona(){
-        
+
+    public dtoPersona() {
     }
 
-    public Persona(String nombre, String apellido, String acercaDe, String fotoperfil) {
+    public dtoPersona(String nombre, String apellido, String acercaDe, String fotoperfil) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.acercaDe = acercaDe;
         this.fotoperfil = fotoperfil;
-    }
-    
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -75,7 +56,6 @@ public class Persona {
     public void setFotoperfil(String fotoperfil) {
         this.fotoperfil = fotoperfil;
     }
-
-                
+    
     
 }
